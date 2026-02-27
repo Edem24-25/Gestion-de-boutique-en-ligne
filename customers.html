@@ -378,25 +378,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Vérifier si l'utilisateur est connecté
-        if (localStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.href = 'login.html';
-        } else {
-            const userName = localStorage.getItem('userName') || 'Admin';
-            const elements = document.querySelectorAll('#userName');
-            elements.forEach(el => {
-                el.textContent = userName;
-            });
-        }
-
-        function logout() {
-            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-                localStorage.removeItem('isLoggedIn');
-                localStorage.removeItem('userEmail');
-                localStorage.removeItem('userName');
-                window.location.href = 'home.html';
-            }
-        }
+       
     </script>
 </body>
 </html>
