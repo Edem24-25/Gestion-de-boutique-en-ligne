@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapports - Boutique en Ligne</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Principale -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="home.html">
+                <i class="bi bi-shop"></i> StoreManager Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-speedometer2"></i> Tableau de Bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">
+                            <i class="bi bi-cart-check"></i> Commandes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="inventory.html">
+                            <i class="bi bi-boxes"></i> Inventaire
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="customers.html">
+                            <i class="bi bi-people"></i> Clients
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="reports.html">
+                            <i class="bi bi-bar-chart"></i> Rapports
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="bi bi-gear"></i> Paramètres
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="bi bi-house"></i> Accueil
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex ms-auto align-items-center">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> <span id="userName">Admin</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear"></i> Paramètres</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Déconnexion</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <main class="p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1><i class="bi bi-bar-chart"></i> Rapports</h1>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-download"></i> Exporter PDF
+                    </button>
+                </div>
+
+                <!-- Period Filter -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Début</label>
+                                <input type="date" class="form-control" id="startDate">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Fin</label>
+                                <input type="date" class="form-control" id="endDate">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Type de Rapport</label>
+                                <select class="form-select" id="reportType" onchange="changeReport()">
+                                    <option value="sales">Ventes</option>
+                                    <option value="inventory">Inventaire</option>
+                                    <option value="customers">Clients</option>
+                                    <option value="logistics">Logistique</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-primary w-100" onclick="generateReport()">
+                                    <i class="bi bi-arrow-clockwise"></i> Générer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales Report -->
+                <div id="salesReport">
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Total Ventes</h6>
+                                    <h3>125,450 €</h3>
+                                    <small class="text-success">+12% vs période précédente</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Nombre Commandes</h6>
+                                    <h3>485</h3>
+                                    <small class="text-success">+8% vs période précédente</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Ticket Moyen</h6>
+                                    <h3>258 €</h3>
+                                    <small class="text-info">Stable</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Taux Conversion</h6>
+                                    <h3>3.8%</h3>
+                                    <small class="text-warning">-0.2% vs période précédente</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Ventes par Jour</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="dailySalesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Top Produits</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group list-group-flush">
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Laptop HP 15</span>
+                                                <span class="badge bg-primary">45 ventes - 40,500 €</span>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Souris Logitech</span>
+                                                <span class="badge bg-info">128 ventes - 3,839 €</span>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Clavier Mécanique</span>
+                                                <span class="badge bg-info">62 ventes - 9,299 €</span>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Casque Audio</span>
+                                                <span class="badge bg-info">89 ventes - 7,119 €</span>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Moniteur 4K</span>
+                                                <span class="badge bg-info">35 ventes - 17,500 €</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Report (Hidden by default) -->
+                <div id="inventoryReport" style="display: none;">
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Valeur Stock Total</h6>
+                                    <h3>145,320 €</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Unités en Stock</h6>
+                                    <h3>1,245</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Produits Rupture</h6>
+                                    <h3 class="text-danger">2</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Stocks Faibles</h6>
+                                    <h3 class="text-warning">4</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Analyse Inventaire</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Stock Actuel</th>
+                                        <th>Stock Min</th>
+                                        <th>Valeur Stock</th>
+                                        <th>Rotation (jours)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Laptop HP 15</td>
+                                        <td>2</td>
+                                        <td>5</td>
+                                        <td>1,799,98 €</td>
+                                        <td class="text-warning">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Souris Logitech</td>
+                                        <td>45</td>
+                                        <td>10</td>
+                                        <td>1,349,55 €</td>
+                                        <td class="text-success">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Clavier Mécanique</td>
+                                        <td>8</td>
+                                        <td>5</td>
+                                        <td>1,199,92 €</td>
+                                        <td class="text-info">7</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logistics Report (Hidden by default) -->
+                <div id="logisticsReport" style="display: none;">
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Commandes Expédiées</h6>
+                                    <h3>432</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Temps Moyen Livraison</h6>
+                                    <h3>2.5 jours</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Taux Livraison À Temps</h6>
+                                    <h3 class="text-success">96%</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Retours</h6>
+                                    <h3>12</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Distribution par Transporteur</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info mb-0">
+                                <strong>Distribution par Transporteur :</strong><br>
+                                • DHL Express: 45%<br>
+                                • FedEx: 30%<br>
+                                • UPS: 25%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Vérifier si l'utilisateur est connecté
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        } else {
+            const userName = localStorage.getItem('userName') || 'Admin';
+            const elements = document.querySelectorAll('#userName');
+            elements.forEach(el => {
+                el.textContent = userName;
+            });
+        }
+
+        function logout() {
+            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userName');
+                window.location.href = 'home.html';
+            }
+        }
+    </script>
+</body>
+</html>

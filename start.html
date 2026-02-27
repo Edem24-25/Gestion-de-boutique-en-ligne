@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système de Gestion Logistique - Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .module {
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #0d6efd;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .module:hover {
+            background-color: #e7f1ff;
+            transform: translateX(5px);
+        }
+        .module-title {
+            color: #0d6efd;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .module-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .btn-module {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .btn-module:hover {
+            background-color: #0b5ed7;
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+        }
+        .features {
+            padding: 0 20px 20px;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list li i {
+            color: #198754;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+        .info-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1000px;">
+        <div class="header">
+            <h1>🎯 Système de Gestion Logistique</h1>
+            <p>Pour Boutique en Ligne</p>
+        </div>
+
+        <div style="padding: 30px;">
+            <div class="info-box">
+                <strong><i class="bi bi-info-circle"></i> Bienvenue!</strong><br>
+                Ce système complet de gestion logistique vous permet de gérer efficacement votre boutique en ligne.
+            </div>
+
+            <h3 style="color: #212529; margin-bottom: 20px;">📂 Modules Disponibles</h3>
+
+            <!-- Tableau de Bord -->
+            <div class="module">
+                <div class="module-title">
+                    <span class="module-icon"><i class="bi bi-speedometer2"></i></span>
+                    Tableau de Bord
+                </div>
+                <p>Vue d'ensemble complète de votre activité avec graphiques et métriques principales.</p>
+                <ul class="feature-list">
+                    <li><i class="bi bi-check"></i> Métriques en temps réel</li>
+                    <li><i class="bi bi-check"></i> Graphiques de ventes</li>
+                    <li><i class="bi bi-check"></i> Commandes récentes</li>
+                    <li><i class="bi bi-check"></i> Stocks faibles</li>
+                </ul>
+                <a href="index.html" class="btn-module">
+                    <i class="bi bi-arrow-right"></i> Accéder au Tableau de Bord
+                </a>
+            </div>
+
+            <!-- Gestion des Commandes -->
+            <div class="module">
+                <div class="module-title">
+                    <span class="module-icon"><i class="bi bi-cart-check"></i></span>
+                    Gestion des Commandes
+                </div>
+                <p>Gérez toutes les commandes de votre boutique avec filtrage et détails complets.</p>
+                <ul class="feature-list">
+                    <li><i class="bi bi-check"></i> Liste des commandes</li>
+                    <li><i class="bi bi-check"></i> Création de commandes</li>
+                    <li><i class="bi bi-check"></i> Filtrage avancé</li>
+                    <li><i class="bi bi-check"></i> Gestion des statuts</li>
+                </ul>
+                <a href="orders.html" class="btn-module">
+                    <i class="bi bi-arrow-right"></i> Gérer les Commandes
+                </a>
+            </div>
+
+            <!-- Gestion de l'Inventaire -->
+            <div class="module">
+                <div class="module-title">
+                    <span class="module-icon"><i class="bi bi-boxes"></i></span>
+                    Gestion de l'Inventaire
+                </div>
+                <p>Suivez vos stocks en temps réel et gérez votre inventaire efficacement.</p>
+                <ul class="feature-list">
+                    <li><i class="bi bi-check"></i> Inventaire en temps réel</li>
+                    <li><i class="bi bi-check"></i> Ajout de produits</li>
+                    <li><i class="bi bi-check"></i> Ajustement des stocks</li>
+                    <li><i class="bi bi-check"></i> Alertes de rupture</li>
+                </ul>
+                <a href="inventory.html" class="btn-module">
+                    <i class="bi bi-arrow-right"></i> Gérer l'Inventaire
+                </a>
+            </div>
+
+            <!-- Gestion des Clients -->
+            <div class="module">
+                <div class="module-title">
+                    <span class="module-icon"><i class="bi bi-people"></i></span>
+                    Gestion des Clients
+                </div>
+                <p>Maintenez une base de données complète de vos clients avec historique des commandes.</p>
+                <ul class="feature-list">
+                    <li><i class="bi bi-check"></i> Base de données clients</li>
+                    <li><i class="bi bi-check"></i> Profils détaillés</li>
+                    <li><i class="bi bi-check"></i> Historique des achats</li>
+                    <li><i class="bi bi-check"></i> Segmentation</li>
+                </ul>
+                <a href="customers.html" class="btn-module">
+                    <i class="bi bi-arrow-right"></i> Gérer les Clients
+                </a>
+            </div>
+
+            <!-- Rapports -->
+            <div class="module">
+                <div class="module-title">
+                    <span class="module-icon"><i class="bi bi-bar-chart"></i></span>
+                    Rapports
+                </div>
+                <p>Analysez votre activité avec des rapports détaillés et des statistiques complètes.</p>
+                <ul class="feature-list">
+                    <li><i class="bi bi-check"></i> Rapports de ventes</li>
+                    <li><i class="bi bi-check"></i> Analyse d'inventaire</li>
+                    <li><i class="bi bi-check"></i> Rapports logistiques</li>
+                    <li><i class="bi bi-check"></i> Graphiques interactifs</li>
+                </ul>
+                <a href="reports.html" class="btn-module">
+                    <i class="bi bi-arrow-right"></i> Voir les Rapports
+                </a>
+            </div>
+
+            <!-- Paramètres -->
+            <div class="module">
+                <div class="module-title">
+                    <span class="module-icon"><i class="bi bi-gear"></i></span>
+                    Paramètres
+                </div>
+                <p>Configurez votre boutique, vos transporteurs, utilisateurs et paramètres de sécurité.</p>
+                <ul class="feature-list">
+                    <li><i class="bi bi-check"></i> Infos de l'entreprise</li>
+                    <li><i class="bi bi-check"></i> Configuration boutique</li>
+                    <li><i class="bi bi-check"></i> Gestion transporteurs</li>
+                    <li><i class="bi bi-check"></i> Gestion utilisateurs</li>
+                </ul>
+                <a href="settings.html" class="btn-module">
+                    <i class="bi bi-arrow-right"></i> Accéder aux Paramètres
+                </a>
+            </div>
+
+            <h3 style="color: #212529; margin-top: 30px; margin-bottom: 20px;">✨ Caractéristiques Principales</h3>
+            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check"></i> Interface moderne et intuitive</li>
+                            <li><i class="bi bi-check"></i> 100% responsive (mobile, tablette, desktop)</li>
+                            <li><i class="bi bi-check"></i> Graphiques interactifs</li>
+                            <li><i class="bi bi-check"></i> Filtrage avancé</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check"></i> Notifications en temps réel</li>
+                            <li><i class="bi bi-check"></i> Gestion des permissions</li>
+                            <li><i class="bi bi-check"></i> Données de démo incluses</li>
+                            <li><i class="bi bi-check"></i> Facile à personnaliser</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📖 <strong>Documentation:</strong> Consultez le fichier README.md pour plus de détails</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Version 1.0.0 | Créé avec ❤️ pour les boutiques en ligne</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Clients - Boutique en Ligne</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Principale -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="home.html">
+                <i class="bi bi-shop"></i> StoreManager Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-speedometer2"></i> Tableau de Bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">
+                            <i class="bi bi-cart-check"></i> Commandes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="inventory.html">
+                            <i class="bi bi-boxes"></i> Inventaire
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="customers.html">
+                            <i class="bi bi-people"></i> Clients
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="bi bi-bar-chart"></i> Rapports
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="bi bi-gear"></i> Paramètres
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="bi bi-house"></i> Accueil
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex ms-auto align-items-center">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> <span id="userName">Admin</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear"></i> Paramètres</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Déconnexion</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <main class="p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1><i class="bi bi-people"></i> Gestion des Clients</h1>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClientModal">
+                        <i class="bi bi-plus-circle"></i> Ajouter Client
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Total Clients</h6>
+                                <h3>245</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Clients Actifs</h6>
+                                <h3>85</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Revenus Totaux</h6>
+                                <h3>65,250 €</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Ticket Moyen</h6>
+                                <h3>266 €</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Statut</label>
+                                <select class="form-select" id="filterStatus" onchange="filterClients()">
+                                    <option value="">Tous les statuts</option>
+                                    <option value="active">Actif</option>
+                                    <option value="inactive">Inactif</option>
+                                    <option value="vip">VIP</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Région</label>
+                                <select class="form-select" id="filterRegion" onchange="filterClients()">
+                                    <option value="">Toutes les régions</option>
+                                    <option value="paris">Île-de-France</option>
+                                    <option value="provence">Provence</option>
+                                    <option value="rhone">Rhône-Alpes</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Recherche</label>
+                                <input type="text" class="form-control" id="searchClient" placeholder="Nom ou email..." onkeyup="filterClients()">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-outline-secondary w-100" onclick="resetFilters()">
+                                    <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clients Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nom</th>
+                                        <th>Email</th>
+                                        <th>Téléphone</th>
+                                        <th>Adresse</th>
+                                        <th>Commandes</th>
+                                        <th>Total Dépensé</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="clientsTable">
+                                    <tr>
+                                        <td>#001</td>
+                                        <td>Jean Dupont</td>
+                                        <td>jean.dupont@email.com</td>
+                                        <td>+33 6 12 34 56 78</td>
+                                        <td>123 Rue de la Paix, Paris</td>
+                                        <td>8</td>
+                                        <td>2,125 €</td>
+                                        <td><span class="badge bg-success">Actif</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#clientModal" onclick="viewClient(1)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editClient(1)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteClient(1)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#002</td>
+                                        <td>Marie Martin</td>
+                                        <td>marie.martin@email.com</td>
+                                        <td>+33 6 23 45 67 89</td>
+                                        <td>456 Avenue de Lyon, Lyon</td>
+                                        <td>12</td>
+                                        <td>3,450 €</td>
+                                        <td><span class="badge bg-warning">VIP</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#clientModal" onclick="viewClient(2)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editClient(2)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteClient(2)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#003</td>
+                                        <td>Pierre Lefevre</td>
+                                        <td>pierre.lefevre@email.com</td>
+                                        <td>+33 6 34 56 78 90</td>
+                                        <td>789 Boulevard Marseille, Marseille</td>
+                                        <td>5</td>
+                                        <td>1,245 €</td>
+                                        <td><span class="badge bg-success">Actif</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#clientModal" onclick="viewClient(3)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editClient(3)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteClient(3)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#004</td>
+                                        <td>Sophie Bernard</td>
+                                        <td>sophie.bernard@email.com</td>
+                                        <td>+33 6 45 67 89 01</td>
+                                        <td>321 Chemin Toulouse, Toulouse</td>
+                                        <td>3</td>
+                                        <td>789 €</td>
+                                        <td><span class="badge bg-secondary">Inactif</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#clientModal" onclick="viewClient(4)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editClient(4)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteClient(4)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#005</td>
+                                        <td>Luc Moreau</td>
+                                        <td>luc.moreau@email.com</td>
+                                        <td>+33 6 56 78 90 12</td>
+                                        <td>654 Route Nice, Nice</td>
+                                        <td>15</td>
+                                        <td>4,890 €</td>
+                                        <td><span class="badge bg-warning">VIP</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#clientModal" onclick="viewClient(5)">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" onclick="editClient(5)">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteClient(5)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Voir Client -->
+    <div class="modal fade" id="clientModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Détails du Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h6>Informations Personnelles</h6>
+                            <p>
+                                <strong>Nom:</strong> <span id="clientName"></span><br>
+                                <strong>Email:</strong> <span id="clientEmail"></span><br>
+                                <strong>Téléphone:</strong> <span id="clientPhone"></span>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Adresse</h6>
+                            <p>
+                                <span id="clientAddress"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <h6>Historique Commandes</h6>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID Commande</th>
+                                <th>Montant</th>
+                                <th>Statut</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientOrders">
+                            <tr>
+                                <td>#2451</td>
+                                <td>259,99 €</td>
+                                <td><span class="badge bg-warning">En attente</span></td>
+                                <td>26 fév 2026</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ajouter Client -->
+    <div class="modal fade" id="addClientModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un Nouveau Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addClientForm">
+                        <div class="mb-3">
+                            <label for="clientNewName" class="form-label">Nom Complet</label>
+                            <input type="text" class="form-control" id="clientNewName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientNewEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="clientNewEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientNewPhone" class="form-label">Téléphone</label>
+                            <input type="tel" class="form-control" id="clientNewPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientNewAddress" class="form-label">Adresse</label>
+                            <textarea class="form-control" id="clientNewAddress" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary">Ajouter Client</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Vérifier si l'utilisateur est connecté
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        } else {
+            const userName = localStorage.getItem('userName') || 'Admin';
+            const elements = document.querySelectorAll('#userName');
+            elements.forEach(el => {
+                el.textContent = userName;
+            });
+        }
+
+        function logout() {
+            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userName');
+                window.location.href = 'home.html';
+            }
+        }
+    </script>
+</body>
+</html>
